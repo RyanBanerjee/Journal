@@ -38,11 +38,7 @@
 // STARTING OFF NOTES APP
 
 const notesContainer = document.querySelector('.notes');
-const notes=[
-    {id:1, title:1, description:"first description"},
-    {id:2, title:2, description:"second description"},
-    {id:3, title:3, description:"third description"}
-]
+const notes= JSON.parse(localStorage.getItem("notes"))
 const titleInput = document.querySelector('.note-title-input')
 const descInput= document.querySelector('.note-desc-input')
 const submitBtn = document.querySelector('.submit-btn')
@@ -63,6 +59,7 @@ function handleAddNote(e) {
   console.log(descInput.value)
   const note = {id:4, title:titleInput.value, description:descInput.value}
   createNote(note)
+  saveNoteToLocalStorage(note)
   resetForm()
 }
 
@@ -82,5 +79,20 @@ function createNote(note) {
 
   notesContainer.appendChild(noteDiv)
 }
-//each row  must have only 4 notes 
+function saveNoteToLocalStorage(note) {
+  notes.push(note)
+  localStorage.setItem("notes",JSON.stringify(notes))
+}
+
+// each row  must have only 4 notes 
 // notes have should a margin or gap between them
+
+// const notes=[
+//     {id:1, title:1, description:"first description"},
+//     {id:2, title:2, description:"second description"},
+//     {id:3, title:3, description:"third description"}
+// ]
+
+// localStorage.setItem("notes",JSON.stringify(notes))  
+
+// 719 5979 1102
