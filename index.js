@@ -77,15 +77,24 @@ function createNote(note) {
   noteDiv.appendChild(noteTitle)
   noteDiv.appendChild(noteDescription)
 
+  const iconsDiv = document.createElement("div");
+  iconsDiv.classList.add("icons")
+  const editIcon = document.createElement("i")
+  editIcon.classList.add("fa-solid", "fa-pen-to-square")
+
+  const deleteIcon = document.createElement("i")
+  deleteIcon.classList.add("fa-solid", "fa-trash")
+  iconsDiv.appendChild(editIcon)
+  iconsDiv.appendChild(deleteIcon)    
+  
+  noteDiv.appendChild(iconsDiv)
   notesContainer.appendChild(noteDiv)
 }
+
 function saveNoteToLocalStorage(note) {
   notes.push(note)
   localStorage.setItem("notes",JSON.stringify(notes))
 }
-
-// each row  must have only 4 notes 
-// notes have should a margin or gap between them
 
 // const notes=[
 //     {id:1, title:1, description:"first description"},
@@ -94,5 +103,3 @@ function saveNoteToLocalStorage(note) {
 // ]
 
 // localStorage.setItem("notes",JSON.stringify(notes))  
-
-// 719 5979 1102

@@ -52,3 +52,8 @@ button {
     gap: 20px; 
     margin-top: 20px;
 }
+
+.icons {
+    display: flex;
+    gap: 12px;
+}
