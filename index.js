@@ -38,7 +38,7 @@
 // STARTING OFF NOTES APP
 
 const notesContainer = document.querySelector('.notes');
-const notes= JSON.parse(localStorage.getItem("notes"))
+const notes= JSON.parse(localStorage.getItem("notes")) || [];
 const titleInput = document.querySelector('.note-title-input')
 const descInput= document.querySelector('.note-desc-input')
 const submitBtn = document.querySelector('.submit-btn')
@@ -86,9 +86,36 @@ function createNote(note) {
   deleteIcon.classList.add("fa-solid", "fa-trash")
   iconsDiv.appendChild(editIcon)
   iconsDiv.appendChild(deleteIcon)    
-  
   noteDiv.appendChild(iconsDiv)
   notesContainer.appendChild(noteDiv)
+
+  editIcon.onclick = () => {
+    console.log("Edit clicked for note:",);
+    const input = document.createElement("input");
+    input.type = "text";
+    input.value = noteTitle.textContent;
+    noteDiv.replaceChild(input,noteTitle)
+    input.addEventListener("keydown", (event)=> {
+      if(event.key == "Enter"){
+        noteTitle.textContent= input.value
+        noteDiv.replaceChild(noteTitle, input)
+      }
+    })
+  } 
+
+  noteDescription.onclick = () => {
+    console.log("Edited description")
+    const input = document.createElement("input")
+    input.addEventListener("keydown", (event)=> {
+      if(event.key == "Enter")
+        noteDescription.textContent= (input.value)
+    })
+  }
+
+  deleteIcon.onclick = () => {
+    console.log("Delete clicked for note:",);
+    noteDiv.remove();
+  } 
 }
 
 function saveNoteToLocalStorage(note) {
@@ -96,10 +123,13 @@ function saveNoteToLocalStorage(note) {
   localStorage.setItem("notes",JSON.stringify(notes))
 }
 
-// const notes=[
+// implement edit description functionallity
+// first log something on the console on click of the description 
+// replace the note description(p) with an input tag having the same value as the text content of the p
+// // const notes=[
 //     {id:1, title:1, description:"first description"},
 //     {id:2, title:2, description:"second description"},
 //     {id:3, title:3, description:"third description"}
 // ]
 
-// localStorage.setItem("notes",JSON.stringify(notes))  
+// localStorage.setItem("notes",JSON.stringify(notes))
