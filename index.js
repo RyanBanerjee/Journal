@@ -106,9 +106,13 @@ function createNote(note) {
   noteDescription.onclick = () => {
     console.log("Edited description")
     const input = document.createElement("input")
+    input.value=noteDescription.textContent
+    noteDiv.replaceChild(input, noteDescription);
     input.addEventListener("keydown", (event)=> {
-      if(event.key == "Enter")
-        noteDescription.textContent= (input.value)
+      if(event.key == "Enter") {
+        noteDescription.textContent= input.value
+        noteDiv.replaceChild(noteDescription, input);
+      }
     })
   }
 
@@ -117,7 +121,6 @@ function createNote(note) {
     noteDiv.remove();
   } 
 }
-
 function saveNoteToLocalStorage(note) {
   notes.push(note)
   localStorage.setItem("notes",JSON.stringify(notes))
