@@ -4,18 +4,43 @@
     box-sizing: border-box;
 }
 
-header div{
-    background-color: teal;
-    width: max-content;
-    padding: 20px 30px;
-}
-
-header {
+.navigation {
+    background-color: white;
+    width: 100vw;
     display: flex;
-    justify-content: center;
-    margin: 30px;
+    justify-content: space-between;
+    align-items: center;
+    padding: 12px 16px;
+    border-bottom: 1px solid #bdbdbd;
 }
 
+body {
+    font-family: "Roboto", sans-serif;
+}
+
+.company {
+    display: flex;
+    gap: 12px;
+    align-items: center;
+}
+
+.company-title {
+    font-size:20px;
+}
+
+.search-box {
+    background-color: #efefef;
+    display: flex;
+    gap: 12px;
+    align-items: center;
+    padding: 12px 16px;
+    border-radius: 6px;
+}
+.search-box input {
+    border: none;
+    outline: none;
+    background-color: #efefef;
+}
 .title {
     color: rgb(255, 255, 255);
     text-align: center;
@@ -30,30 +55,79 @@ header {
     flex-wrap: wrap;
 }
 
+.add-note-form {
+    display: flex;
+    align-items: center;
+    justify-content: center;    
+    flex-direction: column;
+}
 
-input, textarea {
+form input, form textarea {
     display: block;
     margin-top: 10px;
     width: 300px;
     padding: 8px;
+    padding: 12px 16px;
+    border-radius: 6px;
+    background-color: #efefef;
+    outline: none;
+    border: none;
+    font-family: "Roboto", sans-serif;
 }
+
 button {
     margin-top: 10px;
     padding: 8px 12px;
+    border-radius: 6px;
+    background-color: #000;
+    color: white;
+    cursor: pointer;
 }
 
 .note {
     width: 300px;
     background-color: white;
     color: black;
-    border: 1px solid grey;
+    border: 1px solid #bdbdbd;
     border-radius: 12px;
-    padding: 16px;
-    gap: 20px; 
+    padding: 20px; 
+    gap: 12px; 
     margin-top: 20px;
+    border: 1px solid #bdbdbd;
+    border-radius: 12px;
+}
+
+.note:hover {
+    box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+}
+
+.note-desc {
+    margin: 20px 0;
+    outline: none;
+    border: none;
+    font-size: 16px;
 }
 
 .icons {
+    /* color: #888; 
+    position: absolute;
+    top: 10px;
+    right: 10px; */
     display: flex;
-    gap: 12px;
+    gap: 8px;
+    border: none;
+  border-radius: 8px;
+  padding: 10px 4px;
+  font-size: 14px;
 }
+
+.header {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 30px 0;
+}
+
+/* 
+improve button styling
+ */

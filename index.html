@@ -3,18 +3,44 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="./styles.css"/>
     <title class="title">Journal</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
 <body>
     <div>
-        <header>
+        <nav class="navigation">
+            <div class="company">
+                <i class="fa-solid fa-book"></i>
+                <p class="company-title">Daily Journal</p>
+            </div>
+            <div class="search-box">
+                <i class="fa-solid fa-magnifying-glass"></i>
+                <input placeholder="Search"/>
+            </div>
+        </nav>
+        <!-- <header>
             <div>
                 <p class="title">Daily Journal</p>
             </div>
-        </header>
+        </header> -->
+
+        <!-- <header>
+        <div class="header-box">
+            <i class="fa-solid fa-book-open header-icon"></i>
+            <span class="header-text">Daily Journal</span>
+        </div>
+        </header>    -->
     </div>
+    <form class="add-note-form">
+        <input class="note-title-input" type="text" placeholder="Title"/>
+        <textarea class="note-desc-input" placeholder="Description" name="description"></textarea>
+        <button class="submit-btn">Submit</button>
+    </form>
+
 <div class="notes">   
     <!-- <div class="note">
         <h2>1</h2>
@@ -31,11 +57,6 @@
         <p>Description</p>
     </div> -->
 </div> 
-<form>
-    <input class="note-title-input" type="text" placeholder="Title"/>
-    <textarea class="note-desc-input" placeholder="Description" name="description"></textarea>
-    <button class="submit-btn">Submit</button>
-</form>
 
 </body>
 <script src="./index.js"></script>        

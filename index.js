@@ -73,6 +73,7 @@ function createNote(note) {
   const noteTitle = document.createElement("h2");
   noteTitle.textContent = note.title
   const noteDescription = document.createElement("p");
+  noteDescription.classList.add("note-desc")
   noteDescription.textContent = note.description
   noteDiv.appendChild(noteTitle)
   noteDiv.appendChild(noteDescription)
@@ -107,6 +108,7 @@ function createNote(note) {
     console.log("Edited description")
     const input = document.createElement("input")
     input.value=noteDescription.textContent
+    input.classList.add("note-desc")
     noteDiv.replaceChild(input, noteDescription);
     input.addEventListener("keydown", (event)=> {
       if(event.key == "Enter") {
