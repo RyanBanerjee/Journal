@@ -42,6 +42,8 @@ const notes= JSON.parse(localStorage.getItem("notes")) || [];
 const titleInput = document.querySelector('.note-title-input')
 const descInput= document.querySelector('.note-desc-input')
 const submitBtn = document.querySelector('.submit-btn')
+const searchInput = document.querySelector('.search-input')
+let searchQuery = ""
 
 notes.forEach((note) => {
   createNote(note)
@@ -66,6 +68,10 @@ function handleAddNote(e) {
 submitBtn.addEventListener('click',(e) => {
   handleAddNote(e)
 }) 
+searchInput.addEventListener('.change', (e)=>{
+  searchQuery = e.target.value
+  console.log(searchQuery)
+})
 
 function createNote(note) {
   const noteDiv = document.createElement("div")
