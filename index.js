@@ -38,17 +38,27 @@
 // STARTING OFF NOTES APP
 
 const notesContainer = document.querySelector('.notes');
-const notes= JSON.parse(localStorage.getItem("notes")) || [];
+let notes= JSON.parse(localStorage.getItem("notes")) || [];
 const titleInput = document.querySelector('.note-title-input')
 const descInput= document.querySelector('.note-desc-input')
 const submitBtn = document.querySelector('.submit-btn')
 const searchInput = document.querySelector('.search-input')
+let filteredNotes = []
 let searchQuery = ""
 
-notes.forEach((note) => {
-  createNote(note)
-  console.log(notesContainer) 
-});
+if (filteredNotes.length > 0) {
+  console.log("inside filteredNotes")
+  filteredNotes.forEach((note) => {
+    createNote(note)
+    console.log(notesContainer) 
+  });
+} else {
+  console.log("inside notes")
+  notes.forEach((note) => {
+    createNote(note)
+    console.log(notesContainer) 
+  });
+}
 
 function resetForm() {
   titleInput.value = ""
@@ -68,9 +78,20 @@ function handleAddNote(e) {
 submitBtn.addEventListener('click',(e) => {
   handleAddNote(e)
 }) 
-searchInput.addEventListener('.change', (e)=>{
+searchInput.addEventListener('change', (e)=>{
   searchQuery = e.target.value
   console.log(searchQuery)
+  filteredNotes = notes.filter((note) => {
+    return note.title.includes(searchQuery)
+  })
+  console.log(filteredNotes)
+  let saveNotes = notes
+  if (filteredNotes.length > 0) {
+    notes = filteredNotes
+  } else {
+      notes = JSON.parse(localStorage.getItem("notes")) || [];
+  }
+  // [1,2,3]
 })
 
 function createNote(note) {
