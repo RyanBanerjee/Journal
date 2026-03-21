@@ -46,19 +46,14 @@ const searchInput = document.querySelector('.search-input')
 let filteredNotes = []
 let searchQuery = ""
 
-if (filteredNotes.length > 0) {
-  console.log("inside filteredNotes")
-  filteredNotes.forEach((note) => {
+function displayNotes(notesToDisplay) {
+  notesContainer.innerHTML = ""
+  notesToDisplay.forEach((note) => {
     createNote(note)
-    console.log(notesContainer) 
-  });
-} else {
-  console.log("inside notes")
-  notes.forEach((note) => {
-    createNote(note)
-    console.log(notesContainer) 
   });
 }
+
+displayNotes(notes)
 
 function resetForm() {
   titleInput.value = ""
@@ -78,6 +73,7 @@ function handleAddNote(e) {
 submitBtn.addEventListener('click',(e) => {
   handleAddNote(e)
 }) 
+
 searchInput.addEventListener('change', (e)=>{
   searchQuery = e.target.value
   console.log(searchQuery)
@@ -85,13 +81,13 @@ searchInput.addEventListener('change', (e)=>{
     return note.title.includes(searchQuery)
   })
   console.log(filteredNotes)
-  let saveNotes = notes
-  if (filteredNotes.length > 0) {
-    notes = filteredNotes
-  } else {
-      notes = JSON.parse(localStorage.getItem("notes")) || [];
+
+  if(searchQuery){
+    displayNotes(filteredNotes)
+  } else{
+    displayNotes(notes)
   }
-  // [1,2,3]
+  
 })
 
 function createNote(note) {
@@ -150,14 +146,12 @@ function createNote(note) {
     noteDiv.remove();
   } 
 }
+
 function saveNoteToLocalStorage(note) {
   notes.push(note)
   localStorage.setItem("notes",JSON.stringify(notes))
 }
 
-// implement edit description functionallity
-// first log something on the console on click of the description 
-// replace the note description(p) with an input tag having the same value as the text content of the p
 // // const notes=[
 //     {id:1, title:1, description:"first description"},
 //     {id:2, title:2, description:"second description"},
@@ -165,3 +159,6 @@ function saveNoteToLocalStorage(note) {
 // ]
 
 // localStorage.setItem("notes",JSON.stringify(notes))
+
+//when user searched for something, diplay filtered notes
+// when  searchQuery is empty, display notes
