@@ -44,6 +44,7 @@ const descInput= document.querySelector('.note-desc-input')
 const submitBtn = document.querySelector('.submit-btn')
 const searchInput = document.querySelector('.search-input')
 let filteredNotes = []
+let pinnedNotes = []
 let searchQuery = ""
 
 function displayNotes(notesToDisplay) {
@@ -108,8 +109,13 @@ function createNote(note) {
 
   const deleteIcon = document.createElement("i")
   deleteIcon.classList.add("fa-solid", "fa-trash")
+
+  const pinIcon = document.createElement("i")
+  pinIcon.classList.add("fa-solid", "fa-thumbtack")
+
   iconsDiv.appendChild(editIcon)
-  iconsDiv.appendChild(deleteIcon)    
+  iconsDiv.appendChild(deleteIcon) 
+  iconsDiv.appendChild(pinIcon)   
   noteDiv.appendChild(iconsDiv)
   notesContainer.appendChild(noteDiv)
 
@@ -127,6 +133,11 @@ function createNote(note) {
     })
   } 
 
+  pinIcon.onclick = () => {
+    console.log(noteTitle.textContent);
+    pinnedNotes.push(note)
+    console.log(pinnedNotes)
+  }
   noteDescription.onclick = () => {
     console.log("Edited description")
     const input = document.createElement("input")
@@ -140,11 +151,10 @@ function createNote(note) {
       }
     })
   }
-
-  deleteIcon.onclick = () => {
+    deleteIcon.onclick = () => {
     console.log("Delete clicked for note:",);
     noteDiv.remove();
-  } 
+  }
 }
 
 function saveNoteToLocalStorage(note) {
@@ -160,5 +170,8 @@ function saveNoteToLocalStorage(note) {
 
 // localStorage.setItem("notes",JSON.stringify(notes))
 
-//when user searched for something, diplay filtered notes
-// when  searchQuery is empty, display notes
+// addd pin font  aswesome icon next to the delete icon for each note
+// on click of the pin icon, log the title of the note onto the console
+// on click of the pin icon add that note to pinnedNotes array
+// if pinnedNotes array contains items then show a seperate ui by giving prefereence to pinned notes first folllowed by other notes
+// if pinnedNotees is empty then show current ui
