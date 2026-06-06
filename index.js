@@ -48,7 +48,7 @@ let pinnedNotes = []
 let searchQuery = ""
 
 function displayNotes(notesToDisplay) {
-  notesContainer.innerHTML = ""
+    notesContainer.innerHTML = ""
   notesToDisplay.forEach((note) => {
     createNote(note)
   });
@@ -65,7 +65,8 @@ function handleAddNote(e) {
   e.preventDefault(); //disable refreshing the browser
   console.log(titleInput.value)
   console.log(descInput.value)
-  const note = {id:4, title:titleInput.value, description:descInput.value}
+  let noteId = notes.length + 1
+  const note = {id:noteId, title:titleInput.value, description:descInput.value}
   createNote(note)
   saveNoteToLocalStorage(note)
   resetForm()
@@ -135,7 +136,16 @@ function createNote(note) {
 
   pinIcon.onclick = () => {
     console.log(noteTitle.textContent);
-    pinnedNotes.push(note)
+    let isNotePresent = false
+    pinnedNotes.forEach((currentNote) => {
+      if (currentNote.id == note.id) {
+        isNotePresent = true
+      }
+    })
+    if (!isNotePresent) {
+      pinnedNotes.push(note)
+    }
+ 
     console.log(pinnedNotes)
   }
   noteDescription.onclick = () => {
