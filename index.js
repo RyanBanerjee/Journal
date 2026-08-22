@@ -48,13 +48,34 @@ let pinnedNotes = []
 let searchQuery = ""
 
 function displayNotes(notesToDisplay) {
-    notesContainer.innerHTML = ""
+  notesContainer.innerHTML = ""
   notesToDisplay.forEach((note) => {
     createNote(note)
   });
 }
+function displayNotes2() {
+  notesContainer.innerHTML = ""
+  const pinnedHeading = document.createElement("h2")
+  pinnedHeading.textContent = "PINNED NOTES" 
+  notesContainer.appendChild(pinnedHeading)
+  pinnedNotes.forEach((note) => {
+    createNote(note) 
+  })
 
-displayNotes(notes)
+  const othersHeading = document.createElement("h2")
+  othersHeading.textContent = "OTHERS"
+  notesContainer.appendChild(othersHeading)
+  const otherNotes = notes.filter((note) => {
+    return !pinnedNotes.some((pinnedNote) => {
+      return pinnedNote.id == note.id
+    })
+  })
+  otherNotes.forEach((note) => {
+    createNote(note) 
+  })
+}
+
+displayNotes2()
 
 function resetForm() {
   titleInput.value = ""
@@ -147,6 +168,7 @@ function createNote(note) {
     }
  
     console.log(pinnedNotes)
+    displayNotes2()
   }
   noteDescription.onclick = () => {
     console.log("Edited description")
@@ -161,9 +183,14 @@ function createNote(note) {
       }
     })
   }
-    deleteIcon.onclick = () => {
+  deleteIcon.onclick = () => {
     console.log("Delete clicked for note:",);
-    noteDiv.remove();
+    notes = notes.filter((currentNote) => {
+      return currentNote.id !== note.id
+    })
+    localStorage.setItem("notes",JSON.stringify(notes))
+    displayNotes2()
+    console.log(notes)
   }
 }
 
@@ -180,8 +207,11 @@ function saveNoteToLocalStorage(note) {
 
 // localStorage.setItem("notes",JSON.stringify(notes))
 
-// addd pin font  aswesome icon next to the delete icon for each note
-// on click of the pin icon, log the title of the note onto the console
-// on click of the pin icon add that note to pinnedNotes array
-// if pinnedNotes array contains items then show a seperate ui by giving prefereence to pinned notes first folllowed by other notes
-// if pinnedNotees is empty then show current ui
+// Update CSS code so that pinned and othere sections are vertically arranged
+
+// notes = [note1, note2, note3, note4]
+// pinnedNotes = [note3, note4]
+// PINNED NOTES
+// note3 note4
+// OTHERS
+// note1 note2
