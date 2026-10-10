@@ -55,16 +55,22 @@ function displayNotes(notesToDisplay) {
 }
 function displayNotes2() {
   notesContainer.innerHTML = ""
+  const pinnedNotesContainer = document.createElement("div")
+  pinnedNotesContainer.classList.add("pinnedNotes")
+  
   const pinnedHeading = document.createElement("h2")
   pinnedHeading.textContent = "PINNED NOTES" 
-  notesContainer.appendChild(pinnedHeading)
+  pinnedNotesContainer.appendChild(pinnedHeading)
   pinnedNotes.forEach((note) => {
     createNote(note) 
   })
 
+  const otherNotesContainer = document.createElement("div")
+  otherNotesContainer.classList.add("otherNotes")
+
   const othersHeading = document.createElement("h2")
   othersHeading.textContent = "OTHERS"
-  notesContainer.appendChild(othersHeading)
+  otherNotesContainer.appendChild(othersHeading)
   const otherNotes = notes.filter((note) => {
     return !pinnedNotes.some((pinnedNote) => {
       return pinnedNote.id == note.id
@@ -73,6 +79,10 @@ function displayNotes2() {
   otherNotes.forEach((note) => {
     createNote(note) 
   })
+
+  notesContainer.appendChild(pinnedNotesContainer)
+  notesContainer.appendChild(otherNotesContainer)
+
 }
 
 displayNotes2()
@@ -112,7 +122,9 @@ searchInput.addEventListener('change', (e)=>{
   }
   
 })
-
+  function createNote(note, parentContainer = notesContainer) {
+   parentContainer.appendChild(noteDiv)
+}
 function createNote(note) {
   const noteDiv = document.createElement("div")
   noteDiv.classList.add("note")
@@ -207,7 +219,9 @@ function saveNoteToLocalStorage(note) {
 
 // localStorage.setItem("notes",JSON.stringify(notes))
 
-// Update CSS code so that pinned and othere sections are vertically arranged
+// Update create note function when there are pinned notes, such that pinnedNotes appear 
+// as children to the pinnedNotes div and other notes appear to children to the other div
+// if there are no pinned notes the functionality should be the same
 
 // notes = [note1, note2, note3, note4]
 // pinnedNotes = [note3, note4]
